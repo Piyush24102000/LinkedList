@@ -31,10 +31,12 @@ class LinkedList{
   }
   ///// Traverse the head to the last using this.head.next
   display(){
+    let arrow = ""
     while(this.head){
-      console.log(this.head.data)
+      arrow += this.head.data + "->"
       this.head = this.head.next
     }
+    console.log(arrow)
   }
   ////Remove first element
   removeFirst(){
@@ -51,10 +53,48 @@ class LinkedList{
       this.size--
     }
   }
+  getFirst(){
+    return this.head.data
+  }
+  getLast(){
+    return this.tail.data
+  }
+  getIndex(ind){
+    if(ind < 0 || ind >= this.size){
+      return "Index not available in list"
+    }else{
+    let current = this.head;
+    for(let i = 0 ; i < ind ; i++){
+     current = current.next
+    }
+    return this.head.data
+    }
+  }
+  addStart(val){
+    let node = new Node(val)
+    node.next = this.head
+    this.head = node
+    this.size++
+  }
+  insertAtIndex(val,ind){
+    if(ind == 0){
+      this.addStart(val)
+    }
+    else{
+    let node = new Node(val)
+    let current = this.head;
+    for(let i = 0 ; i < ind-1 ; i++){
+      current = current.next
+    }
+    node.next = current.next
+    current.next = node
+    }
+    this.size++
+  }
 }
 const linkedList = new LinkedList()
-// linkedList.addNode(9)
-// linkedList.addNode(2)
+linkedList.addNode(9)
+linkedList.addNode(2)
 linkedList.addNode(3)
-//linkedList.removeFirst()
+linkedList.insertAtIndex(99,3)
 linkedList.display()
